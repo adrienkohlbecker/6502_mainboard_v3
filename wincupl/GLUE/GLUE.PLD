@@ -1,0 +1,47 @@
+Name     Glue ;
+PartNo   00 ;
+Date     05/11/2021 ;
+Revision 01 ;
+Designer Engineer ;
+Company  - ;
+Assembly None ;
+Location  ;
+Device   G22V10 ;
+
+/* *************** INPUT PINS *********************/
+PIN    1 = U6_1                      ; /*                                 */
+PIN    2 = U6_2                      ; /*                                 */
+PIN    3 = U6_3                      ; /*                                 */
+PIN    4 = OSC_EN                    ; /*                                 */
+PIN    5 = BE                        ; /*                                 */
+PIN    6 = RDY                       ; /*                                 */
+PIN    7 = RW                        ; /*                                 */
+PIN    8 = IRQ1                      ; /*                                 */
+PIN    9 = IRQ2                      ; /*                                 */
+PIN   10 = IRQ3                      ; /*                                 */
+PIN   11 = IRQ4                      ; /*                                 */
+PIN   13 = OSC                       ; /*                                 */
+
+/* *************** OUTPUT PINS *********************/
+PIN   14 = !IRQ                      ; /*                                 */
+PIN   15 = CLK                       ; /*                                 */
+PIN   16 = U6_16                     ; /*                                 */
+PIN   17 = U6_17                     ; /*                                 */
+PIN   18 = U6_18                     ; /*                                 */
+PIN   19 = U6_19                     ; /*                                 */
+PIN   20 = U6_20                     ; /*                                 */
+PIN   21 = U6_21                     ; /*                                 */
+PIN   22 = !READ                     ; /*                                 */
+PIN   23 = !WRITE                    ; /*                                 */
+
+
+CLK = OSC;
+CLK.OE = OSC_EN;
+
+IRQ = !IRQ1 # !IRQ2 # !IRQ3 # !IRQ4;
+
+READ = RW & (CLK # !RDY);
+READ.OE = BE;
+
+WRITE = !RW & (CLK # !RDY);
+WRITE.OE = BE;
